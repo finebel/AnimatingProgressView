@@ -8,13 +8,34 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol AnimatingProgressViewDelegate: class {
+    func startButtonDidTap()
+}
+
+class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseID", for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+        return cell
+        
+    }
 }
 
+
+extension ViewController: AnimatingProgressViewDelegate {
+    func startButtonDidTap() {
+        print(#function)
+    }
+    
+    
+}
+//        cell.delegate = self
