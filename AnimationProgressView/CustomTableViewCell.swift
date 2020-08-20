@@ -12,6 +12,8 @@ class CustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var progressView: UIProgressView!
     
+    weak var delegate: AnimatingProgressViewDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,10 +26,6 @@ class CustomTableViewCell: UITableViewCell {
     }
 
     @IBAction func startButtonDidTap(_ sender: UIButton) {
-        UIView.animate(withDuration: 5) {
-            self.progressView.setProgress(1, animated: true)
-        }
+        delegate?.startButtonDidTap(progressView: progressView)
     }
 }
-
-

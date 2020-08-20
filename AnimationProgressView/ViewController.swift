@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AnimatingProgressViewDelegate: class {
-    func startButtonDidTap()
+    func startButtonDidTap(progressView: UIProgressView)
 }
 
 class ViewController: UITableViewController {
@@ -25,17 +25,19 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "reuseID", for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+        cell.delegate = self
         return cell
         
     }
 }
 
-
 extension ViewController: AnimatingProgressViewDelegate {
-    func startButtonDidTap() {
-        print(#function)
+    func startButtonDidTap(progressView: UIProgressView) {
+        UIView.animate(withDuration: 5, animations: {
+            progressView.setProgress(1, animated: true)
+        })
     }
     
     
 }
-//        cell.delegate = self
+
